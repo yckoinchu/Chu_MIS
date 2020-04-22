@@ -13,5 +13,20 @@ namespace Chu_MIS.Controllers
         {
             return View();
         }
+        public ActionResult upload(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                if (file.ContentLength > 0)
+                {
+                    var fileName = System.IO.Path.GetFileName(file.FileName);
+                    var path = System.IO.Path.Combine(Server.MapPath("~/KoData/uploads"), fileName);
+                    file.SaveAs(path);
+                }
+
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
